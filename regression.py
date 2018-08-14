@@ -102,7 +102,7 @@ model.compile(loss='mse', optimizer='sgd')
 # In[21]:
 
 
-model.fit(X_train, Y_train, batch_size=1, epochs=10, initial_epoch=0)
+model.fit(X_train, Y_train, batch_size=1, epochs=100, initial_epoch=0)
 
 
 # In[22]:
