@@ -116,6 +116,3 @@ print (score)
 
 # In[24]:
 
-
-$ jupyter nbconvert --to script regression.ipynb
-
