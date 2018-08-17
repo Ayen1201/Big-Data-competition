@@ -79,7 +79,7 @@ Y_test.shape
 
 
 model = Sequential()
-model.add(CuDNNGRU(30000,
+model.add(CuDNNGRU(3000,
     return_sequences=False,
 ))
 
