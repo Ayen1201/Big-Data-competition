@@ -106,7 +106,7 @@ model.fit(X_train, Y_train, epochs=150, batch_size=10)
 test_data = model.predict(X_test, batch_size=1)
 print ("test_data = \n",test_data,'\n\n')
 diff = abs(test_data-Y_test)
-print ("Different = \n",diff)
+print ("Different = \n",diff,'\n')
 
 
 # In[ ]:
