@@ -80,39 +80,41 @@ Y_test.shape
 
 
 model = Sequential()
-model.add(CuDNNGRU(5,
-    batch_input_size=(5, 7500, 4),
+model.add(CuDNNGRU(100,
+
     return_sequences=False,
-    stateful=True
+
 ))
 
 
 # In[ ]:
 
-
-model.add(Dense(100))
 model.add(Dense(1))
-adam = keras.optimizers.Adam(lr=0.0001, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
+adam = keras.optimizers.Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
 model.compile(optimizer=adam,loss='mse')
 
 
-# In[ ]:
-
-
-model.fit(X_train, Y_train, epochs=200, batch_size=10)
-
 
 # In[ ]:
 
 
-test_data = model.predict(X_test, batch_size=50)
-print (test_data)
+model.fit(X_train, Y_train, epochs=150, batch_size=10)
+
+# In[ ]:
+
+
+test_data = model.predict(X_test, batch_size=1)
+print ("test_data = \n",test_data,'\n\n')
+diff = abs(test_data-Y_test)
+print ("Different = \n",diff)
 
 
 # In[ ]:
 
 
-model.summary
+diff_sqr = diff**2
+RMSE =( diff_sqr.sum()/10 )**0.5
+print("RMSE = ",RMSE)
 
 
 
