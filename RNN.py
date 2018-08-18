@@ -80,7 +80,7 @@ Y_test.shape
 
 
 model = Sequential()
-model.add(GRU(50,
+model.add(CuDNNGRU(50,
     batch_input_shape=(1,7500,4),
     return_sequences=False,
     stateful=True
@@ -97,7 +97,7 @@ model.compile(optimizer=adam,loss='mse')
 # In[ ]:
 
 
-model.fit(X_train, Y_train, epochs=150, batch_size=1)
+model.fit(X_train, Y_train, epochs=100, batch_size=1)
 
 # In[ ]:
 
