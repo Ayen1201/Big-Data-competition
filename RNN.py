@@ -31,7 +31,7 @@ for x in range(0,29):
 # In[6]:
 
 
-X_train = X_train*10000000
+X_train = X_train*10**6
 
 
 # In[7]:
@@ -41,7 +41,7 @@ X_test = np.zeros((10,7500,4))
 
 for x in range(30,39):
     X_test[x-30] = pd.read_excel('{num}.xls'.format(num = x)).drop('Col5',axis=1).values
-X_test = X_test*10000000
+X_test = X_test*10**6
 
 
 # In[8]:
@@ -76,7 +76,7 @@ Y_test.shape
 
 
 model = Sequential()
-model.add(CuDNNGRU(10,
+model.add(CuDNNGRU(5,
     
     return_sequences=False,
     ))   
@@ -85,7 +85,6 @@ model.add(CuDNNGRU(10,
 # In[16]:
 
 
-model.add(Dropout(0.1))
 model.add(Dense(1, W_regularizer=l2(0.01)))
 adam = keras.optimizers.Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
 model.compile(optimizer=adam,loss='mse')
@@ -95,14 +94,13 @@ model.compile(optimizer=adam,loss='mse')
 
 
 earlyStopping = EarlyStopping(monitor='val_loss', min_delta=0.0001, patience=3)
-model.fit(X_train, Y_train, epochs=1, batch_size=10, callbacks=[earlyStopping])
+model.fit(X_train, Y_train, epochs=500, batch_size=5, callbacks=[earlyStopping])
 
 
 # In[ ]:
 
 
-test_data = model.predict(X_test, batch_size=1)
-train_data = model.predict(X_train, batch_size=1)
+test_data = model.predict(X_test, batch_size=5)
 print ("test_data = \n",test_data,'\n\n')
 diff1 = abs(test_data-Y_test)
 print ("test_Different = \n",diff1,'\n')
@@ -114,7 +112,7 @@ print("Test_RMSE = \n",Test_RMSE)
 # In[ ]:
 
 
-train_data = model.predict(X_train, batch_size=1)
+train_data = model.predict(X_train, batch_size=5)
 print ("train_data = \n",train_data,'\n\n')
 diff2 = abs(train_data-Y_train)
 diff2_sqr = diff2**2
