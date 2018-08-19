@@ -114,7 +114,7 @@ train_data = model.predict(X_train, batch_size=5)
 print ("train_data = \n",train_data,'\n\n')
 diff2 = abs(train_data-Y_train)
 diff2_sqr = diff2**2
-Train_RMSE =( diff2_sqr.sum()/10 )**0.5
+Train_RMSE =( diff2_sqr.sum()/30 )**0.5
 print("Train_RMSE = ",Train_RMSE)
 
 
