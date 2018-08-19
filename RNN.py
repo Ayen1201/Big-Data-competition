@@ -59,18 +59,6 @@ Y_train = Ydata[0:30]
 Y_test = Ydata[30:40]
 
 
-# In[10]:
-
-
-Y_train.shape
-
-
-# In[11]:
-
-
-Y_test.shape
-
-
 # In[12]:
 
 
