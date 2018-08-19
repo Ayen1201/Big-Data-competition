@@ -25,12 +25,12 @@ X_train = np.zeros((30, 7500, 4))
 
 for x in range(0,29):
     X_train[x] = pd.read_excel('{num}.xls'.format(num = x)).drop('Col5',axis=1).values
-
+X_train = X_train*10**6
 
 # In[6]:
 
 
-X_train = X_train*10**6
+
 
 
 # In[7]:
