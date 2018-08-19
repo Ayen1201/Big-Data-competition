@@ -8,7 +8,6 @@ import keras
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten, Activation, CuDNNGRU
 from keras import optimizers
-from keras.callbacks import EarlyStopping
 from keras.regularizers import l1,l2
 
 
@@ -94,7 +93,7 @@ model.compile(optimizer=adam,loss='mse')
 
 
 earlyStopping = EarlyStopping(monitor='val_loss', min_delta=0.0001, patience=3)
-model.fit(X_train, Y_train, epochs=500, batch_size=5, callbacks=[earlyStopping])
+model.fit(X_train, Y_train, epochs=500, batch_size=5)
 
 
 # In[ ]:
