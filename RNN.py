@@ -101,7 +101,7 @@ model.fit(X_train, Y_train, epochs=500, batch_size=5)
 test_data = model.predict(X_test, batch_size=5)
 print ("test_data = \n",test_data,'\n\n')
 diff1 = abs(test_data-Y_test)
-print ("test_Different = \n",diff1,'\n')
+print ("test_Deviation = \n",diff1,'\n')
 diff1_sqr = diff1**2
 Test_RMSE =( diff1_sqr.sum()/10 )**0.5
 print("Test_RMSE = \n",Test_RMSE)
