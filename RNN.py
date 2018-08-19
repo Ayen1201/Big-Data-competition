@@ -6,7 +6,7 @@
 
 import keras
 from keras.models import Sequential
-from keras.layers import Dense, Dropout, Flatten, Activation, GRU
+from keras.layers import Dense, Dropout, Flatten, Activation, CuDNNGRU
 from keras import optimizers
 from keras.callbacks import EarlyStopping
 from keras.regularizers import l1,l2
@@ -76,7 +76,7 @@ Y_test.shape
 
 
 model = Sequential()
-model.add(GRU(10,
+model.add(CuDNNGRU(10,
     
     return_sequences=False,
     ))   
@@ -85,7 +85,7 @@ model.add(GRU(10,
 # In[16]:
 
 
-model.add(Dropout(0.3))
+model.add(Dropout(0.1))
 model.add(Dense(1, W_regularizer=l2(0.01)))
 adam = keras.optimizers.Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
 model.compile(optimizer=adam,loss='mse')
@@ -122,8 +122,4 @@ Train_RMSE =( diff2_sqr.sum()/10 )**0.5
 print("Train_RMSE = ",Train_RMSE)
 
 
-# In[ ]:
-
-
-get_ipython().system('jupyter nbconvert --to script RNN.ipynb')
 
