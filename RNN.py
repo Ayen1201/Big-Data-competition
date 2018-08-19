@@ -81,39 +81,42 @@ Y_test.shape
 
 model = Sequential()
 model.add(CuDNNGRU(50,
-    batch_input_shape=(1,7500,4),
     return_sequences=False,
-    stateful=True
 ))
 
 # In[ ]:
 
-model.add(Dense(100))
 model.add(Dense(1))
-adam = keras.optimizers.Adam(lr=0.0001, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
+adam = keras.optimizers.Adam(lr=0.005, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
 model.compile(optimizer=adam,loss='mse')
 
 
 # In[ ]:
 
 
-model.fit(X_train, Y_train, epochs=100, batch_size=1)
+model.fit(X_train, Y_train, epochs=2000, batch_size=1)
 
 # In[ ]:
 
 
 test_data = model.predict(X_test, batch_size=1)
+train_data = model.predict(X_train, batch_size=1)
 print ("test_data = \n",test_data,'\n\n')
-diff = abs(test_data-Y_test)
-print ("Different = \n",diff,'\n')
+diff1 = abs(test_data-Y_test)
+print ("test_Different = \n",diff,'\n')
+diff1_sqr = diff1**2
+Test_RMSE =( diff1_sqr.sum()/10 )**0.5
+print("Test_RMSE = \n",Test_RMSE)
 
 
 # In[ ]:
 
-
-diff_sqr = diff**2
-RMSE =( diff_sqr.sum()/10 )**0.5
-print("RMSE = ",RMSE)
+train_data = model.predict(X_train, batch_size=1)
+print ("train_data = \n",train_data,'\n\n')
+diff2 = abs(train_data-Y_train)
+diff2_sqr = diff2**2
+Train_RMSE =( diff2_sqr.sum()/10 )**0.5
+print("Train_RMSE = ",Train_RMSE)
 
 
 
