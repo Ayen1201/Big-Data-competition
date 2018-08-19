@@ -92,7 +92,6 @@ model.compile(optimizer=adam,loss='mse')
 # In[17]:
 
 
-earlyStopping = EarlyStopping(monitor='val_loss', min_delta=0.0001, patience=3)
 model.fit(X_train, Y_train, epochs=500, batch_size=5)
 
 
